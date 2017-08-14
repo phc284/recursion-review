@@ -17,14 +17,14 @@ var stringifyJSON = function(obj) {
       return 'null';
     }
     for (var key in obj) {
-      if(typeof obj[key] !== 'function'){
-        if(string !== ''){
+      if (typeof obj[key] !== 'function') {
+        if (string !== '') {
           string += ',';
         }
         string += stringifyJSON(key) + ':' + stringifyJSON(obj[key]);
       } else {
-          return '{}';
-        }
+        return '{}';
+      }
     }
     return '{' + string + '}';
   } else if (typeof obj === 'string') {
