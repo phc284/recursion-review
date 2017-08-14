@@ -31,8 +31,11 @@ var parseJSON = function(json) {
 
   var parseString = function(string) {
     var result = '';
-    while (string[index] !== '"' || string[index] !== '\'') {
-      console.log(string[index]);
+    while ( string[index] !== '"' || string[index] !== '\'') {
+      //console.log(string[index]);
+      if ( index > string.length) {
+        return result;
+      }
       result += string[index];
       index++;
     }
