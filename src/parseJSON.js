@@ -9,20 +9,7 @@ var parseJSON = function(json) {
   let stringJson = json;
   //console.log(json);
   let index = 0;
-  if (json[index] === '[') {
-    //return parseArray(json)
-    index++;
-    parseArray(stringJson);
-    console.log('This is an array');
-  } else if (json[index] === '{') {
-    result = {};
-    console.log('This is an object');
-  } else if (json[index] === '"') {
-    result = '';
-    console.log('This is a string');
-  } else {
-    
-  }
+
 
   var parseArray = function(string) {
     var result = [];
@@ -33,24 +20,46 @@ var parseJSON = function(json) {
     }*/
     if (string[index] === '"' || string[index] === '\'') {
       index++;
-      result.push(parseString(string));
+      if (string[index] !== ']') {
+        result.push(parseString(string));
+      } else {
+        return result;
+      } //what to do with closing bracket
     }
     
-    return result;
   };
 
   var parseString = function(string) {
     var result = '';
-    while (string[index] !== '"' || string[index] !== "'") {
+    while (string[index] !== '"' || string[index] !== '\'') {
+      console.log(string[index]);
       result += string[index];
       index++;
     }
     return result;
   };
 
-  return result;
+  if (json[index] === '[') {
+    //return parseArray(json)
+    index++;
+    //console.log(json);
+    return parseArray(stringJson);
+  } else if (json[index] === '{') {
+    result = {};
+    console.log('This is an object');
+  } else if (json[index] === '"') {
+    result = '';
+    console.log('This is a string');
+  } else {
+    
+  }
+
+
+
   // your code goes here
 };
+
+console.log(parseJSON('["foo"]'));
 
 //how to make "9" into a number?
 
