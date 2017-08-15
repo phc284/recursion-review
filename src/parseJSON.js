@@ -18,27 +18,36 @@ var parseJSON = function(json) {
       index++;
       result.push(parseArray(string));
     }*/
+    console.log('Enter Array');
     if (string[index] === '"' || string[index] === '\'') {
       index++;
       if (string[index] !== ']') {
         result.push(parseString(string));
       } else {
+        console.log('Exit Array');
         return result;
       } //what to do with closing bracket
     }
-    
+    return result;
   };
 
   var parseString = function(string) {
     var result = '';
-    while ( string[index] !== '"' || string[index] !== '\'') {
+    console.log('Enter parseString');
+    console.log('Starting on character ' + string[index] + ' in ' + string);
+    while ( string[index] !== '"' && string[index] !== '\'') {
       //console.log(string[index]);
+      console.log('on char ' + string[index] + ' in ' + string);
+      //console.log(string[index] === '"');
       if ( index > string.length) {
         return result;
       }
       result += string[index];
       index++;
     }
+    index++;
+    console.log('string Parse result is ' + result);
+    console.log('Exit parseString');
     return result;
   };
 
